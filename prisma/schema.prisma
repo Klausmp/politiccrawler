@@ -13,9 +13,40 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Party {
+  id      Int       @id
+  name    String
+  Channel Channel[]
+}
+
 model Channel {
-  id         String   @id @default(uuid())
-  name       String
-  channel_id String
-  createdAt  DateTime @default(now())
+  id                String   @id @default(uuid())
+  name              String
+  channel_id        String
+  is_party_channel  Boolean  @default(false)
+  subscriber        Int?     @default(0)
+  views             Int?     @default(0)
+  partyId           Int
+  party_affiliation Party    @relation(fields: [partyId], references: [id], onDelete: Cascade)
+  createdAt         DateTime @default(now())
+}
+
+model Youtube_Video {
+  id                   String                 @id @default(uuid())
+  name                 String
+  views                String
+  likes                String
+  video_id             String
+  youtube_Video_Update Youtube_Video_Update[]
+  createdAt            DateTime               @default(now())
+}
+
+model Youtube_Video_Update {
+  id              String        @id @default(uuid())
+  youtube_Video   Youtube_Video @relation(fields: [youtube_VideoId], references: [id], onDelete: Cascade)
+  youtube_VideoId String
+  views           Int
+  likes           Int
+  comment_amount  Int
+  createdAt       DateTime      @default(now())
 }

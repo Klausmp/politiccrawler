@@ -24,36 +24,11 @@ services:
 
   # Example Airflow container, or you can remove it if you only need Postgres.
   airflow:
-    image: apache/airflow:2.5.1
-    container_name: airflow
+    image: ${DOCKER_USER_NAME}/${AIRFLOW_DOCKER_NAME}:${AIRFLOW_DOCKER_TAG}
+    container_name: $AIRFLOW_CONTAINER_NAME
     depends_on:
       - postgres
-    environment:
-      AIRFLOW__CORE__EXECUTOR: LocalExecutor
-      # Using the new [database] config key:
-      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres:5432/airflow
-      AIRFLOW__CORE__FERNET_KEY: "REPLACE_ME_WITH_A_REAL_FERNET_KEY"
-      AIRFLOW__WEBSERVER__SECRET_KEY: "some_random_secret_key_for_sessions"
-      AIRFLOW__CORE__LOAD_EXAMPLES: "False"
     volumes:
       - ./dags:/opt/airflow/dags
     ports:
-      - "8080:8080"
-    command: >
-      bash -c "
-        echo 'Waiting for Postgres to be ready...' &&
-        while ! pg_isready -h postgres -p 5432 -U airflow; do
-          sleep 1
-        done &&
-        echo 'Postgres is up! Starting Airflow...' &&
-        airflow db init &&
-        airflow users create
-          --username admin
-          --password admin
-          --firstname Admin
-          --lastname User
-          --role Admin
-          --email admin@example.com &&
-        airflow scheduler &
-        airflow webserver
-      "
+      - $AIRFLOW_PORT:8080
