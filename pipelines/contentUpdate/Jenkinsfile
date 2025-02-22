@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Youtube') {
       steps {
-        sh 'python --version"'
+        sh 'python --version'
       }
     }
   }
