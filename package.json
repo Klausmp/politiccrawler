@@ -10,7 +10,8 @@
     "build-db-seed": "tsc prisma/seed.ts --outDir dist/prisma",
     "db-seed": "npm run build-seed && node dist/prisma/seed.js",
     "build-airflow": "bash ./scripts/build_airflow.sh",
-    "build-deploy-airflow": "npm run build-airflow && docker compose up -d"
+    "build-deploy-airflow": "npm run build-airflow && docker compose up -d",
+    "build-jenkins": "bash ./scripts/build_jenkins.sh"
   },
   "dependencies": {
     "@prisma/client": "^6.4.0",
