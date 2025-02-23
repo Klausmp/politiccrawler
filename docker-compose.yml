@@ -2,10 +2,6 @@ services:
   postgres:
     image: postgres:13
     container_name: postgres
-    environment:
-      POSTGRES_USER: airflow
-      POSTGRES_PASSWORD: airflow
-      POSTGRES_DB: airflow
     volumes:
       # This volume persists the Postgres data
       - ./.postgres_data:/var/lib/postgresql/data
@@ -16,19 +12,3 @@ services:
 
     ports:
       - "5432:5432"
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U airflow"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-
-  # Example Airflow container, or you can remove it if you only need Postgres.
-  airflow:
-    image: ${DOCKER_USER_NAME}/${AIRFLOW_DOCKER_NAME}:${AIRFLOW_DOCKER_TAG}
-    container_name: $AIRFLOW_CONTAINER_NAME
-    depends_on:
-      - postgres
-    volumes:
-      - ./dags:/opt/airflow/dags
-    ports:
-      - $AIRFLOW_PORT:8080

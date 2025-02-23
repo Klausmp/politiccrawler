@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Youtube') {
       steps {
-        sh 'python3 --version'
+        sh 'npm run update-channels '
       }
     }
   }

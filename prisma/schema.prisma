@@ -20,15 +20,23 @@ model Party {
 }
 
 model Channel {
-  id                String   @id @default(uuid())
+  id                String           @id @default(uuid())
   name              String
   channel_id        String
-  is_party_channel  Boolean  @default(false)
-  subscriber        Int?     @default(0)
-  views             Int?     @default(0)
+  is_party_channel  Boolean          @default(false)
   partyId           Int
-  party_affiliation Party    @relation(fields: [partyId], references: [id], onDelete: Cascade)
-  createdAt         DateTime @default(now())
+  party_affiliation Party            @relation(fields: [partyId], references: [id], onDelete: Cascade)
+  createdAt         DateTime         @default(now())
+  channel_update    Channel_Update[]
+}
+
+model Channel_Update {
+  id         String   @id @default(uuid())
+  channel_Id String
+  channel    Channel  @relation(fields: [channel_Id], references: [id])
+  subscriber Int?     @default(0)
+  views      Int?     @default(0)
+  createdAt  DateTime @default(now())
 }
 
 model Youtube_Video {
@@ -37,7 +45,7 @@ model Youtube_Video {
   views                String
   likes                String
   video_id             String
-  youtube_Video_Update Youtube_Video_Update[]
+  youtube_video_update Youtube_Video_Update[]
   createdAt            DateTime               @default(now())
 }
 
