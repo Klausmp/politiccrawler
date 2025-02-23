@@ -14,6 +14,7 @@ export const enum Party {
 async function main() {
     // Clear existing entries (optional).
     await prisma.party.deleteMany();
+    await prisma.channel_Update.deleteMany();
     await prisma.channel.deleteMany();
 
     // Major German political parties.
