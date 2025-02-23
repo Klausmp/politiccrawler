@@ -1,22 +1,22 @@
 pipeline {
-  agent any
+	agent any
   stages {
-    stage('Prepare .env') {
-      steps {
-        // Load the secret .env file and copy it to the workspace
-        withCredentials([file(credentialsId: 'politcrawler_env', variable: 'ENV_FILE')]) {
-          sh '''
-            echo "Copying secret .env file to workspace..."
-            cp $ENV_FILE .env
-            # Optionally, verify by listing the file (avoid printing sensitive contents)
-            ls -l .env
-          '''
-        }
+		stage('Prepare .env') {
+			steps {
+				// Load the secret .env file and copy it to the workspace
+        withCredentials([file(credentialsId: 'politcrawler_env', variable: 'ENV_FILE')]) {sh '''
+    		echo "Removing any existing .env file..."
+    		rm -f .env || true
+    		echo "Copying secret .env file to workspace..."
+    		cp $ENV_FILE .env
+    		ls -l .env
+  			'''
+		}
       }
     }
     stage('Youtube') {
-      steps {
-        sh 'bash ./scripts/update_channel_data.sh'
+			steps {
+				sh 'bash ./scripts/update_channel_data.sh'
       }
     }
   }
