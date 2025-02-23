@@ -9,6 +9,7 @@
     "lint": "next lint",
     "db-migrate": "npx prisma migrate dev",
     "db-seed": "node dist/prisma/seed.js",
+    "db-migrate-and-seed": "npm run db-migrate && db-seed",
     "build-jenkins": "./scripts/build_jenkins.sh",
     "remote_deploy_jenkins": "./scripts/remote_deploy_jenkins.sh",
     "build-and-remote-deploy-jenkins": "./scripts/build-and-remote-deploy-jenkins.sh",
