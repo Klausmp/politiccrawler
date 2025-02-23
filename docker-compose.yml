@@ -2,13 +2,12 @@ services:
   postgres:
     image: postgres:13
     container_name: postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
     volumes:
       # This volume persists the Postgres data
       - ./.postgres_data:/var/lib/postgresql/data
-
-      # Place your schema file(s) here so Postgres runs them on container initialization.
-      # All SQL files inside /docker-entrypoint-initdb.d run exactly once if no database is initialized.
-      - ./initdb:/docker-entrypoint-initdb.d
-
     ports:
       - "5432:5432"

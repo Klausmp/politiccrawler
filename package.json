@@ -13,7 +13,8 @@
     "remote_deploy_jenkins": "./scripts/remote_deploy_jenkins.sh",
     "build-and-remote-deploy-jenkins": "./scripts/build-and-remote-deploy-jenkins.sh",
     "update-requirements-file": "rm ./requirements.txt && pip freeze > requirements.txt",
-    "update-channels": "bash ./scripts/update_channel_data.sh"
+    "update-channels": "./scripts/update_channel_data.sh",
+    "remote-deploy": "./scripts/remote_deploy.sh"
   },
   "dependencies": {
     "@prisma/client": "^6.4.0",
