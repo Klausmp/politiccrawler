@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Youtube') {
       steps {
-        sh 'npm run update-channels '
+        sh 'bash ./scripts/update_channel_data.sh'
       }
     }
   }
