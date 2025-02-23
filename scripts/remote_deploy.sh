@@ -19,10 +19,6 @@ echo "Ensuring remote directory '$REMOTE_HOST_TMP_DIR' exists on $HOST..."
 # Create the remote directory
 ssh "$HOST" "mkdir -p $REMOTE_HOST_TMP_DIR"
 
-# Copy the docker-compose file from the local directory to the remote directory
-echo "Copying docker-compose.yml to remote host..."
-scp ./docker-compose.yml "$HOST:$REMOTE_HOST_TMP_DIR"
-
 
 # Sanitize .env file by removing lines starting with YT_API_KEY=
 echo "Sanitizing .env file..."

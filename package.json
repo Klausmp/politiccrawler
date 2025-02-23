@@ -20,7 +20,8 @@
     "@prisma/client": "^6.4.0",
     "next": "15.1.7",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "undici": "^7.3.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
