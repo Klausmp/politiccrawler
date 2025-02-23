@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  jenkins:
+    restart: always
+    image: "${DOCKER_USER_NAME}/${JENKINS_DOCKER_NAME}:${JENKINS_DOCKER_TAG}"
+    ports:
+      - "8080:8080"
+    volumes:
+      - jenkins_home:/var/jenkins_home
+
+  ssh-agent:
+    restart: always
+    image: jenkins/ssh-agent
+
+volumes:
+  jenkins_home:
