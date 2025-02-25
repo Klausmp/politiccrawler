@@ -1,13 +1,11 @@
-import ast
 import os
 from dotenv import load_dotenv
 from googleapiclient.discovery import build
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-
 from youtube_transcript_api import YouTubeTranscriptApi
-
 from custom_types import *
+
 
 def get_latest_videos(api_key: str, channel_id: str) -> list:
     """
@@ -24,12 +22,12 @@ def get_latest_videos(api_key: str, channel_id: str) -> list:
     videos = []
 
     for item in response.get('items', []):
-        if item['id'].get('videoId'):
+        if 'videoId' in item['id']:
             transcript = ""
             try:
                 transcript = str(YouTubeTranscriptApi.get_transcript(item['id']['videoId'], languages=['de']))
-            except:
-                transcript = ""
+            except Exception as e:
+                print(f"Transcript fetch failed for {item['id']['videoId']}: {e}")
 
             videos.append({
                 'video_id': item['id']['videoId'],
@@ -46,13 +44,10 @@ def get_video_statistics(api_key: str, video_id: str) -> dict:
     Fetches statistics for a given YouTube video.
     """
     youtube = build('youtube', 'v3', developerKey=api_key)
-    request = youtube.videos().list(
-        part='statistics',
-        id=video_id
-    )
+    request = youtube.videos().list(part='statistics', id=video_id)
     response = request.execute()
 
-    if 'items' in response and response['items']:
+    if response.get('items'):
         statistics = response['items'][0].get('statistics', {})
         stats = {
             'views': int(statistics.get('viewCount', 0)),
@@ -80,24 +75,30 @@ def update_videos(api_key: str, session):
         for video in videos:
             existing_video = session.query(Youtube_Video).filter_by(video_id=video['video_id']).first()
 
+            # Ensure the video is correctly linked to a channel
             if not existing_video:
                 new_video = Youtube_Video(
                     name=video['title'],
                     video_id=video['video_id'],
                     transcript=video["transcript"],
-                    channelId=channel.id  # Linking video to the correct channel
+                    channelId=channel.id  # Ensure channelId is set
                 )
                 session.add(new_video)
-                session.commit()
+                session.commit()  # Commit to get the new video ID
                 existing_video = new_video
                 print(f"Added new video: {video['title']} ({video['video_id']})")
             else:
                 print(f"Video already exists: {video['title']} ({video['video_id']})")
 
+            # Make sure `existing_video` has a valid ID before updating stats
+            if existing_video.id is None:
+                print(f"Skipping stats update for {video['title']} - Missing ID")
+                continue  # Avoid inserting a row with a NULL foreign key
+
             stats = get_video_statistics(api_key, video['video_id'])
 
             video_update = Youtube_Video_Update(
-                youtube_VideoId=existing_video.id,  # Correct: Uses the proper column name
+                youtube_VideoId=existing_video.id,  # Ensure this matches the database column name
                 views=stats.get('views', 0),
                 likes=stats.get('likes', 0),
                 comment_amount=stats.get('comment_amount', 0)
@@ -105,7 +106,7 @@ def update_videos(api_key: str, session):
             session.add(video_update)
             print(f"Updated stats for video: {video['title']} ({video['video_id']})")
 
-    session.commit()
+    session.commit()  # Commit once after processing all videos
 
 
 if __name__ == '__main__':
