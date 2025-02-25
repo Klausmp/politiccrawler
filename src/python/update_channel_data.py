@@ -38,7 +38,7 @@ def update_channels(api_key: str, session):
             print(f"Updating channel {channel.name}: Subscribers={subscriber_count}, Views={view_count}")
             # Create a new Channel_Update record
             channel_update = Channel_Update(
-                channel_Id=channel.id,
+                channelId=channel.id,
                 subscriber=subscriber_count,
                 views=view_count
             )

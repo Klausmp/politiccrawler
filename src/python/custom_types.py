@@ -33,7 +33,7 @@ class Channel_Update(Base):
     __tablename__ = 'Channel_Update'
 
     id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
-    channelId = Column(String, ForeignKey('Channel.id', ondelete="CASCADE"), nullable=False)
+    channelId = Column("channel_Id", String, ForeignKey('Channel.id', ondelete="CASCADE"), nullable=False)
     subscriber = Column(Integer, default=0, nullable=True)
     views = Column(Integer, default=0, nullable=True)
     createdAt = Column(DateTime, default=datetime.utcnow)
@@ -56,7 +56,7 @@ class Youtube_Video_Update(Base):
     __tablename__ = 'Youtube_Video_Update'
 
     id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
-    youtube_VideoId = Column(String, ForeignKey('Youtube_Video.id', ondelete="CASCADE"),nullable=False)
+    youtube_VideoId = Column(String, ForeignKey('Youtube_Video.id', ondelete="CASCADE"), nullable=False)
     views = Column(Integer, default=0, nullable=False)
     likes = Column(Integer, default=0, nullable=False)
     comment_amount = Column(Integer, default=0, nullable=False)
