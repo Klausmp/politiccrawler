@@ -17,7 +17,7 @@ pipeline {
     stage('Update Youtube') {
 			steps {
 				sh 'bash ./scripts/update_channel_data.sh'
-				sh "bash ./scripts/update_video_data.sh"
+				sh "bash ./scripts/update_videos.sh"
       }
     }
   }
