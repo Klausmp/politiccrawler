@@ -2,15 +2,15 @@
 
 source .env
 
-if [ ! -d "venv" ]; then
-  echo "Virtual environment not found. Creating one..."
+if [ ! -f "$VENV_PATH" ]; then
+  echo "Virtual environment not found at '$VENV_PATH'. Creating one..."
   python3 -m venv venv || { echo "Failed to create virtual environment"; exit 1; }
   echo "Virtual environment created at 'venv/'."
 else
-  echo "Virtual environment already exists."
+  echo "Virtual environment already exists at '$VENV_PATH'."
 fi
 
-source venv/bin/activate
+source $VENV_PATH
 
 pip install -r requirements.txt
 
