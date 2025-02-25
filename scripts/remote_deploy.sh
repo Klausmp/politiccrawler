@@ -34,7 +34,7 @@ rm .env.sanitized
 # Deploy on the remote host using Docker Compose v2
 echo "Deploying services on remote host using docker compose..."
 ssh "$HOST" <<'EOF'
-REMOTE_HOST_TMP_DIR="./politcrawler"
+REMOTE_HOST_TMP_DIR="~/politcrawler"
 # Ensure the remote directory exists (again, just to be safe)
 mkdir -p "$REMOTE_HOST_TMP_DIR"
 cd "$REMOTE_HOST_TMP_DIR"

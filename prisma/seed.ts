@@ -18,7 +18,7 @@ async function main() {
     await prisma.channel.deleteMany();
 
     // Major German political parties.
-    await seedPartys();
+    await seedParties();
 
     await seedChannel("CDU", "UCKyWIEse3u7ExKfAWuDMVnw", Party.CDU, true);
     await seedChannel("SPD", "UCSmbK1WtpYn2sOGLvSSXkKw", Party.SPD, true);
@@ -30,7 +30,7 @@ async function main() {
 
 }
 
-async function seedPartys() {
+async function seedParties() {
     const germanParties = [
         {name: "CDU", id: Party.CDU},
         {name: "SPD", id: Party.SPD},

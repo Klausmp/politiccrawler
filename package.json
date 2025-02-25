@@ -8,13 +8,14 @@
     "start": "next start",
     "lint": "next lint",
     "db-migrate": "npx prisma migrate dev",
-    "db-seed": "node dist/prisma/seed.js",
+    "db-seed": "prisma generate && prisma db push --accept-data-loss && node dist/prisma/seed.js",
     "db-migrate-and-seed": "npm run db-migrate && npm run db-seed",
     "build-jenkins": "./scripts/build_jenkins.sh",
     "remote_deploy_jenkins": "./scripts/remote_deploy_jenkins.sh",
     "build-and-remote-deploy-jenkins": "./scripts/build-and-remote-deploy-jenkins.sh",
     "update-requirements-file": "rm ./requirements.txt && pip freeze > requirements.txt",
     "update-channels": "./scripts/update_channel_data.sh",
+    "update-videos": "./scripts/update_videos.sh",
     "remote-deploy": "./scripts/remote_deploy.sh"
   },
   "dependencies": {

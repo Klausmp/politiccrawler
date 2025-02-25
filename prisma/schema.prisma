@@ -28,6 +28,7 @@ model Channel {
   party_affiliation Party            @relation(fields: [partyId], references: [id], onDelete: Cascade)
   createdAt         DateTime         @default(now())
   channel_update    Channel_Update[]
+  Youtube_Video     Youtube_Video[]
 }
 
 model Channel_Update {
@@ -42,8 +43,9 @@ model Channel_Update {
 model Youtube_Video {
   id                   String                 @id @default(uuid())
   name                 String
-  views                String
-  likes                String
+  channelId            String
+  channel              Channel                @relation(fields: [channelId], references: [id], onDelete: Cascade)
+  transcript           String
   video_id             String
   youtube_video_update Youtube_Video_Update[]
   createdAt            DateTime               @default(now())

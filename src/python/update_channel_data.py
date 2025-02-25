@@ -1,36 +1,9 @@
 from googleapiclient.discovery import build
 from sqlalchemy import create_engine, Column, String, Boolean, Integer, DateTime, ForeignKey
 from sqlalchemy.orm import declarative_base, sessionmaker, relationship
-import uuid
-import datetime
+from custom_types import *
 import os
 from dotenv import load_dotenv
-
-# SQLAlchemy base class
-Base = declarative_base()
-
-
-# Define the Channel model
-class Channel(Base):
-    __tablename__ = 'Channel'
-    id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
-    name = Column(String)
-    channel_id = Column(String)
-    is_party_channel = Column(Boolean, default=False)
-    partyId = Column(Integer)
-    createdAt = Column(DateTime, default=datetime.datetime.utcnow)
-    channel_updates = relationship("Channel_Update", back_populates="channel")
-
-
-# Define the Channel_Update model
-class Channel_Update(Base):
-    __tablename__ = 'Channel_Update'
-    id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
-    channel_Id = Column(String, ForeignKey('Channel.id'))
-    subscriber = Column(Integer, default=0)
-    views = Column(Integer, default=0)
-    createdAt = Column(DateTime, default=datetime.datetime.utcnow)
-    channel = relationship("Channel", back_populates="channel_updates")
 
 
 def get_channel_statistics(api_key: str, channel_id: str) -> dict:
