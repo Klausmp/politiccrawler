@@ -15,7 +15,7 @@ def get_latest_videos(api_key: str, channel_id: str) -> list:
     request = youtube.search().list(
         part='id,snippet',
         channelId=channel_id,
-        maxResults=10,
+        maxResults=3,
         order='date'
     )
     response = request.execute()
