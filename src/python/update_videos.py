@@ -9,7 +9,7 @@ from custom_types import *
 
 def get_latest_videos(api_key: str, channel_id: str) -> list:
     """
-    Fetches the latest 10 videos of a given YouTube channel.
+    Fetches the latest three videos of a given YouTube channel.
     """
     youtube = build('youtube', 'v3', developerKey=api_key)
     request = youtube.search().list(
