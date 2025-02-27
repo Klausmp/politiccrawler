@@ -1,36 +1,77 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# PoliticCrawler
 
-## Getting Started
+PoliticCrawler is an application designed to analyze political content from social media platforms.
+It aggregates data
+from various political channels, categorizes them by political parties or along a left-right spectrum, generates
+transcripts of the content, and uses AI to analyze and classify the content into specific categories.
+Additionally,
+it features a web-based user interface for data visualization and administrative tasks, and implements a distributed
+system to efficiently manage API call limitations.
 
-First, run the development server:
+## Features
+- **Data Aggregation**: Collects content from political channels across multiple social media platforms.
+- **Categorization**: Assigns content to specific political parties or positions it on a left-right political spectrum.
+- **Transcription**: Converts audio and video content into text transcripts for detailed analysis.
+- **AI Analysis**: Employs artificial intelligence to analyze transcripts and categorize content based on themes,
+  sentiment, and other relevant metrics.
+- **Web Interface**: Provides a user-friendly web UI to visualize data through graphs and charts, and includes
+  administrative pages for managing channels and system settings.
+- **Distributed System**: Implements a distributed architecture to manage API call limitations by allowing multiple
+  contributors to update channel data without exposing database credentials.
+
+## Installation (Developer Setup)
+
+### Prerequisites
+
+- [Docker](https://www.docker.com/) installed on your system.
+- [Node.js](https://nodejs.org/) installed.
+- [Python](https://www.python.org/) installed.
+
+### Steps
+
+1. **Clone the Repository**:
+
+```bash
+git clone https://github.com/Klausmp/politiccrawler.git
+cd politiccrawler
+```
+
+2. **Set Up the Environment Variables**:
+
+```bash
+cp example.env .env
+```
+
+3. **Install the Dependencies**:
+```bash
+npm install
+```
+
+4. **Build the Docker Containers**:
+   This command will start the necessary services, including the PostgresSQL database.
+
+```bash
+docker-compose up -d
+```
+
+5. **Run the Migrations and Seed the DB**:
+   This command will create the necessary tables in the database. This will also seed the database with some initial data.
+
+```bash
+npm run db-migrate-and-seed
+```
+
+6. **Start the Application**:
+   This command will start the backend server and the frontend development server.
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+``` 
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+7. **Access the Application**:
+   Open your browser and navigate to `http://localhost:3000`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+License
+This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
