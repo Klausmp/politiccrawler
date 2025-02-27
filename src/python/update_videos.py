@@ -63,14 +63,16 @@ def get_video_statistics(api_key: str, video_id: str) -> dict:
 
 def update_videos(api_key: str, session):
     """
-    Retrieves all channels from the database, fetches their latest videos,
+    Retrieves all channels from the database, fetches their latest 3 videos,
     checks if they exist in the database, and updates their statistics.
     """
     channels = session.query(Channel).all()
 
     for channel in channels:
         print(f"Processing channel: {channel.name} ({channel.channel_id})")
-        videos = get_latest_videos(api_key, channel.channel_id)
+
+        # Fetch only the latest 3 videos for each channel
+        videos = get_latest_videos(api_key, channel.channel_id)[:3]
 
         for video in videos:
             existing_video = session.query(Youtube_Video).filter_by(video_id=video['video_id']).first()
