@@ -36,7 +36,7 @@ git clone https://github.com/Klausmp/politiccrawler.git
 cd politiccrawler
 ```
 
-2. **Set Up the Environment Variables**:
+2. **Set Up the Environment Variables and add [Youtube Api Key](https://developers.google.com/youtube/v3/getting-started?hl=de)**:
 
 ```bash
 cp example.env .env
