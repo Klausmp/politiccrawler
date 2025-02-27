@@ -48,22 +48,16 @@ npm install
 ```
 
 4. **Build the Docker Containers**:
-   This command will start the necessary services, including the PostgresSQL database.
-
 ```bash
 docker-compose up -d
 ```
 
 5. **Run the Migrations and Seed the DB**:
-   This command will create the necessary tables in the database. This will also seed the database with some initial data.
-
 ```bash
 npm run db-migrate-and-seed
 ```
 
 6. **Start the Application**:
-   This command will start the backend server and the frontend development server.
-
 ```bash
 npm run dev
 ``` 
