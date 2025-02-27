@@ -22,7 +22,7 @@ model Party {
 model Channel {
   id                String           @id @default(uuid())
   name              String
-  channel_id        String           @unique
+  channel_id        String
   is_party_channel  Boolean          @default(false)
   partyId           BigInt
   party_affiliation Party            @relation(fields: [partyId], references: [id], onDelete: Cascade)
