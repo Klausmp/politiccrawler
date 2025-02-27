@@ -1,7 +1,7 @@
 import uuid
 from datetime import datetime
 
-from sqlalchemy import Column, String, Boolean, Integer, DateTime, ForeignKey
+from sqlalchemy import Column, String, Boolean, BigInteger, DateTime, ForeignKey
 from sqlalchemy.orm import declarative_base
 
 # SQLAlchemy base class
@@ -12,7 +12,7 @@ Base = declarative_base()
 class Party(Base):
     __tablename__ = 'Party'
 
-    id = Column(Integer, primary_key=True)
+    id = Column(BigInteger, primary_key=True)
     name = Column(String, nullable=False)
 
 
@@ -24,7 +24,7 @@ class Channel(Base):
     name = Column(String, nullable=False)
     channel_id = Column(String, nullable=False)
     is_party_channel = Column(Boolean, default=False)
-    partyId = Column(Integer, ForeignKey('Party.id', ondelete="CASCADE"), nullable=False)
+    partyId = Column(BigInteger, ForeignKey('Party.id', ondelete="CASCADE"), nullable=False)
     createdAt = Column(DateTime, default=datetime.utcnow)
 
 
@@ -34,8 +34,8 @@ class Channel_Update(Base):
 
     id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
     channelId = Column("channel_Id", String, ForeignKey('Channel.id', ondelete="CASCADE"), nullable=False)
-    subscriber = Column(Integer, default=0, nullable=True)
-    views = Column(Integer, default=0, nullable=True)
+    subscriber = Column(BigInteger, default=0, nullable=True)
+    views = Column(BigInteger, default=0, nullable=True)
     createdAt = Column(DateTime, default=datetime.utcnow)
 
 
@@ -57,7 +57,7 @@ class Youtube_Video_Update(Base):
 
     id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
     youtube_VideoId = Column(String, ForeignKey('Youtube_Video.id', ondelete="CASCADE"), nullable=False)
-    views = Column(Integer, default=0, nullable=False)
-    likes = Column(Integer, default=0, nullable=False)
-    comment_amount = Column(Integer, default=0, nullable=False)
+    views = Column(BigInteger, default=0, nullable=False)
+    likes = Column(BigInteger, default=0, nullable=False)
+    comment_amount = Column(BigInteger, default=0, nullable=False)
     createdAt = Column(DateTime, default=datetime.utcnow)
