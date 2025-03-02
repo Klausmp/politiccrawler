@@ -1,0 +1,2 @@
+0 0 * * * python3 /home/polticrawler/src/update_channel_data.py >> /var/log/cron.log 2>&1
+0 1 * * * python3 /home/polticrawler/src/update_videos.py >> /var/log/cron.log 2>&1

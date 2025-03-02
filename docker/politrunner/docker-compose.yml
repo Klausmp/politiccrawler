@@ -1,0 +1,11 @@
+version: "3.8"
+
+services:
+  politrunner:
+    image: "${DOCKER_USER_NAME}/${POLITRUNNER_DOCKER_NAME}:${POLITRUNNER_DOCKER_TAG}"
+    container_name: politrunner
+    env_file:
+      - ../../.env
+    volumes:
+      - ./logs:/home/polticrawler/logs
+    restart: always

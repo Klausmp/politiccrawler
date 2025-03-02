@@ -1,45 +1,85 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
 
-# dependencies
-/node_modules
-/.pnp
-.pnp.*
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/versions
+# Virtual environment
+venv/
+env/
+*.venv
 
-# testing
-/coverage
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+.installed.cfg
+*.egg
+pip-wheel-metadata/
 
-# next.js
-/.next/
-/out/
+# PyCharm specific
+.idea/
+*.iml
+*.iws
+*.ipr
 
-# production
-/build
+# VS Code specific (if applicable)
+.vscode/
 
-# misc
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Logs and databases
+*.log
+*.sqlite3
+*.db
+*.sql
+*.sqlite
+
+# Testing / Coverage reports
+.tox/
+.nox/
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# Cython and compiled files
+*.c
+*.so
+*.o
+*.pyd
+
+# macOS specific
 .DS_Store
-*.pem
 
-# debug
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-.pnpm-debug.log*
+# Windows specific
+Thumbs.db
+Desktop.ini
 
-# env files (can opt-in for committing if needed)
+# Docker
+*.dockerfile
+docker-compose.override.yml
+
+# Security
 .env
+.env.local
+.secrets
+alembic.ini
 
-# vercel
-.vercel
+# MyPy type checker
+.mypy_cache/
 
-# typescript
-*.tsbuildinfo
-next-env.d.ts
+# Poetry
+.poetry/
 
-.build
-.postgres_data
-/.env
+# Pipenv
+Pipfile
+Pipfile.lock
+
+# Pyright
+.pyright/
+
+# Ruff Linter
+.ruff_cache/
+
+# Custom Ignore (Add project-specific ignores below)

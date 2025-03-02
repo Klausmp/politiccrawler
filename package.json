@@ -1,40 +1,8 @@
 {
-  "name": "politiccrawler",
-  "version": "0.1.0",
-  "private": false,
-  "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
-    "db-migrate": "npx prisma migrate dev",
-    "db-seed": "prisma generate && prisma db push --accept-data-loss && node dist/prisma/seed.js",
-    "db-migrate-and-seed": "npm run db-migrate && npm run db-seed",
-    "build-jenkins": "./scripts/build_jenkins.sh",
-    "remote_deploy_jenkins": "./scripts/remote_deploy_jenkins.sh",
-    "build-and-remote-deploy-jenkins": "./scripts/build-and-remote-deploy-jenkins.sh",
-    "update-requirements-file": "rm ./requirements.txt && pip freeze > requirements.txt",
-    "update-channels": "./scripts/update_channel_data.sh",
-    "update-videos": "./scripts/update_videos.sh",
-    "remote-deploy": "./scripts/remote_deploy.sh"
+  "devDependencies": {
+    "prisma": "^5.17.0"
   },
   "dependencies": {
-    "@prisma/client": "^6.4.0",
-    "next": "15.1.7",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0"
-  },
-  "devDependencies": {
-    "@eslint/eslintrc": "^3",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "eslint": "^9",
-    "eslint-config-next": "15.1.7",
-    "postcss": "^8",
-    "prisma": "^6.4.0",
-    "tailwindcss": "^3.4.1",
-    "ts-node": "^10.9.2",
-    "typescript": "^5"
+    "@prisma/client": "^5.17.0"
   }
 }

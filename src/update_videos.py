@@ -4,7 +4,7 @@ from googleapiclient.discovery import build
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from youtube_transcript_api import YouTubeTranscriptApi
-from custom_types import *
+from src.db_types import *
 
 
 def get_latest_videos(api_key: str, channel_id: str) -> list:
